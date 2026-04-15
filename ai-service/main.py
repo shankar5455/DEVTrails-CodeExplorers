@@ -252,8 +252,10 @@ async def predict_fraud(req: FraudCheckRequest):
     prediction = fraud_model.predict(features)[0]  # type: ignore[union-attr]
     raw_score = fraud_model.decision_function(features)[0]  # type: ignore[union-attr]
 
-    # Map decision_function output to a 0-1 fraud score (lower decision → higher fraud)
-    fraud_score = max(0.0, min(1.0, 0.5 - raw_score))
+    # Map decision_function output to 0-1 fraud score: offset centres normal
+    # samples around 0.5, negative raw_score (anomaly) pushes fraud_score > 0.5
+    FRAUD_SCORE_OFFSET = 0.5
+    fraud_score = max(0.0, min(1.0, FRAUD_SCORE_OFFSET - raw_score))
     is_fraud = bool(prediction == -1)
 
     reasons = []
