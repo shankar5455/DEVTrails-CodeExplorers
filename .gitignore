@@ -1,0 +1,31 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# AI Service
+ai-service/__pycache__/
+ai-service/*.pyc
+ai-service/venv/
+ai-service/*.joblib
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.log
